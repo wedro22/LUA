@@ -8,7 +8,7 @@ local chest_names = {
 	ironchest = "minecraft:ironchest",
 	chest = "minecraft:chest",
 	largishchest = "xu2:tilelargishchest"
-end
+}
 
 
 

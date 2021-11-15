@@ -1,6 +1,6 @@
 --storagedrawers:controller_0 --turtle_0
 local storagedrawers = "storagedrawers:controller"  --хранилка пылей
-local tur = "turtle"  --туртля для сбора кучек
+local tur  --туртля для сбора кучек
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
 
 --инициализация модема
@@ -10,6 +10,7 @@ modem.open(15)
 --обновление списка устройств device_all
 local function refrechDevices()
 	device_all = modem.getNamesRemote()
+	table.insert(device_all, 0, modem.getNameLocal() --вставить себя на индекс 0
 end
 
 --[[возвращает список устройств в данной сети по аргументу-преффиксу имени.
@@ -29,6 +30,10 @@ local function getDeviceList(device_name)
 end
 
 refrechDevices()
+for k, v in pairs(device_all) do
+	print(k, v)
+end
+print("____")
 for k, v in pairs(getDeviceList(tur)) do
 	print(k, v)
 end

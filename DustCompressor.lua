@@ -1,6 +1,6 @@
 --storagedrawers:controller_0 --turtle_0
 local storagedrawers = "storagedrawers:controller"  --хранилка пылей
-local turtle = "turtle"  --туртля для сбора кучек
+local tur = "turtle"  --туртля для сбора кучек
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
 
 --инициализация модема
@@ -16,7 +16,7 @@ end
 При переключении устройств, могут меняться их суффиксы (номера),
 поэтому работать даже с 1 устройством, как со списком, надежнее --]]
 local function getDeviceList(device_name)
-	if not device_name then
+	if (not device_name) or (#device_name == 0) then
 		return nil
 	end
 	local dev_list = {}
@@ -29,4 +29,6 @@ local function getDeviceList(device_name)
 end
 
 refrechDevices()
-print(getDeviceList(turtle))
+for k, v in pairs(getDeviceList(tur)) do
+	print(k, v)
+end

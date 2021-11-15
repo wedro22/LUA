@@ -21,7 +21,7 @@ local function getDeviceList(device_name)
 	end
 	local dev_list = {}
 	for _, dev in pairs(device_all) do
-		if string.sub(device_name, 1, #device_name) == device_name then
+		if string.sub(dev, 1, #device_name) == device_name then
 			table.insert(dev_list, dev)
 		end
 	end

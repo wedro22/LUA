@@ -16,6 +16,9 @@ end
 При переключении устройств, могут меняться их суффиксы (номера),
 поэтому работать даже с 1 устройством, как со списком, надежнее --]]
 local function getDeviceList(device_name)
+	if not device_name then
+		return nil
+	end
 	local dev_list = {}
 	for _, dev in pairs(device_all) do
 		if string.sub(device_name, 1, #device_name) == device_name then
@@ -26,4 +29,4 @@ local function getDeviceList(device_name)
 end
 
 refrechDevices()
-print(getDeviceList(storagedrawers))
+print(getDeviceList(turtle))

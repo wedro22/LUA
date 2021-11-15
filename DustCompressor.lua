@@ -1,9 +1,9 @@
---storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
+п»ї--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
 --minecraft:chest_0 xu2:tilelargishchest_0
-local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
-local storagedrawers = "storagedrawers:controller"  --хранилка пылей
---сундуки для подключений
-local chest_all = {}  --список всех сундуков сети, обновляется refrechDevices()
+local device_all = {}  --СЃРїРёСЃРѕРє РІСЃРµС… СѓСЃС‚СЂРѕР№СЃС‚РІ СЃРµС‚Рё, РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ refrechDevices()
+local storagedrawers = "storagedrawers:controller"  --С…СЂР°РЅРёР»РєР° РїС‹Р»РµР№
+--СЃСѓРЅРґСѓРєРё РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёР№
+local chest_all = {}  --СЃРїРёСЃРѕРє РІСЃРµС… СЃСѓРЅРґСѓРєРѕРІ СЃРµС‚Рё, РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ refrechDevices()
 local chest_names = {
 	ironchest = "minecraft:ironchest",
 	chest = "minecraft:chest",
@@ -12,14 +12,14 @@ local chest_names = {
 
 
 
---инициализация модема
+--РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРѕРґРµРјР°
 local modem = peripheral.find("modem")
 modem.open(15)
 
---обновление списка устройств device_all
+--РѕР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° СѓСЃС‚СЂРѕР№СЃС‚РІ device_all
 local function refrechDevices()
 	device_all = modem.getNamesRemote()
-	--table.insert(device_all, 0, modem.getNameLocal()) --вставить себя на индекс 0
+	--table.insert(device_all, 0, modem.getNameLocal()) --РІСЃС‚Р°РІРёС‚СЊ СЃРµР±СЏ РЅР° РёРЅРґРµРєСЃ 0
 	for _, dev in pairs(device_all) do
 		for _, ch in pairs(chest_names) do
 			if string.sub(dev, 1, #ch) == ch then
@@ -29,9 +29,9 @@ local function refrechDevices()
 	end
 end
 
---[[возвращает список устройств в данной сети по аргументу-преффиксу имени.
-При переключении устройств, могут меняться их суффиксы (номера),
-поэтому работать даже с 1 устройством, как со списком, надежнее --]]
+--[[РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє СѓСЃС‚СЂРѕР№СЃС‚РІ РІ РґР°РЅРЅРѕР№ СЃРµС‚Рё РїРѕ Р°СЂРіСѓРјРµРЅС‚Сѓ-РїСЂРµС„С„РёРєСЃСѓ РёРјРµРЅРё.
+РџСЂРё РїРµСЂРµРєР»СЋС‡РµРЅРёРё СѓСЃС‚СЂРѕР№СЃС‚РІ, РјРѕРіСѓС‚ РјРµРЅСЏС‚СЊСЃСЏ РёС… СЃСѓС„С„РёРєСЃС‹ (РЅРѕРјРµСЂР°),
+РїРѕСЌС‚РѕРјСѓ СЂР°Р±РѕС‚Р°С‚СЊ РґР°Р¶Рµ СЃ 1 СѓСЃС‚СЂРѕР№СЃС‚РІРѕРј, РєР°Рє СЃРѕ СЃРїРёСЃРєРѕРј, РЅР°РґРµР¶РЅРµРµ --]]
 local function getDeviceList(device_name)
 	if (not device_name) or (#device_name == 0) then
 		return nil
@@ -45,7 +45,7 @@ local function getDeviceList(device_name)
 	return dev_list
 end
 
---своё имя в сети
+--СЃРІРѕС‘ РёРјСЏ РІ СЃРµС‚Рё
 local function getSelf()
 	return modem.getNameLocal()
 end

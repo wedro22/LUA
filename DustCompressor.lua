@@ -1,7 +1,16 @@
---storagedrawers:controller_0 --turtle_0
-local storagedrawers = "storagedrawers:controller"  --хранилка пылей
-local tur  --туртля для сбора кучек
+--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
+--minecraft:chest_0 xu2:tilelargishchest_0
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
+local storagedrawers = "storagedrawers:controller"  --хранилка пылей
+--сундуки для подключений
+local chest_all = {}  --список всех сундуков сети, обновляется refrechDevices()
+local chest_names = {
+	ironchest = "minecraft:ironchest",
+	chest = "minecraft:chest",
+	largishchest = "xu2:tilelargishchest"
+end
+
+
 
 --инициализация модема
 local modem = peripheral.find("modem")
@@ -10,7 +19,14 @@ modem.open(15)
 --обновление списка устройств device_all
 local function refrechDevices()
 	device_all = modem.getNamesRemote()
-	table.insert(device_all, 0, modem.getNameLocal() --вставить себя на индекс 0
+	--table.insert(device_all, 0, modem.getNameLocal()) --вставить себя на индекс 0
+	for _, dev in pairs(device_all) do
+		for _, ch in pairs(chest_names) do
+			if string.sub(dev, 1, #ch) == ch then
+				table.insert(chest_all, dev)
+			end
+		end
+	end
 end
 
 --[[возвращает список устройств в данной сети по аргументу-преффиксу имени.
@@ -29,11 +45,12 @@ local function getDeviceList(device_name)
 	return dev_list
 end
 
-refrechDevices()
-for k, v in pairs(device_all) do
-	print(k, v)
+--своё имя в сети
+local function getSelf()
+	return modem.getNameLocal()
 end
-print("____")
-for k, v in pairs(getDeviceList(tur)) do
+
+refrechDevices()
+for k, v in pairs(chest_all) do
 	print(k, v)
 end

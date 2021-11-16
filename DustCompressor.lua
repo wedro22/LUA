@@ -56,7 +56,7 @@ local function unloadAll()
 	for i=1, 16 do
 		if turtle.getItemCount(i)>0 then
 			--pullItems(fromName, fromSlot [, limit [, toSlot]])
-			modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
+			modem.callRemote(storage[1], "pullItems", getSelf(), i, 64, 1)
 			sleep(1)
 			if turtle.getItemCount(i)>0 then
 				while turtle.getItemCount(i)>0 do

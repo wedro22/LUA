@@ -111,13 +111,16 @@ local function chest_stack(chest)
 			n9 = math.floor(maxcount/9)
 			
 			index = 1
+			slotCount = 0
 			for cell, c in pairs(dusts[dust]) do
 				--pushItems(toName, fromSlot [, limit [, toSlot]])
+				turtle_get(chest, cell, n9-slotCount, getTurtleSlot(index))
 				slotCount = turtle.getItemCount(getTurtleSlot(index))
-				while slotCount >= n9 do
-					turtle_get(chest, cell, n9-slotCount, getTurtleSlot(index))
-					index = index+1
-					slotCount = turtle.getItemCount(getTurtleSlot(index))
+				if slotCount<9 then
+					break
+				else
+					index = index + 1
+					slotCount = 0
 				end
 			end
 			

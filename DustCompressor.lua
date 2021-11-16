@@ -148,6 +148,7 @@ end
 
 
 refrechDevices()
+sleep(1)
 storage = getDeviceList(storagename)
 unloadAll()
 while true do

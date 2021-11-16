@@ -70,6 +70,10 @@ local function getTurtleSlot(index)
 	return slot
 end
 
+local function turtle_get(chest, fromSlot, lim, toSlot)
+	modem.callRemote(chest, "pushItems", getSelf(), fromSlot, lim, toSlot)
+end
+
 local function chest_stack(chest)
 	lut = modem.callRemote(chest, "list")
 	if (not lut) or #lut == 0 then
@@ -109,13 +113,15 @@ local function chest_stack(chest)
 			index = 1
 			for cell, c in pairs(dusts[dust]) do
 				--pushItems(toName, fromSlot [, limit [, toSlot]])
-				while (not (turtle.getItemCount(getTurtleSlot(index))>=n9)) and (index<9) do  --пока ячейки заполняются дополна
-					--попытка заполнить остаток текущего слота
-					modem.callRemote(chest, "pushItems", getSelf(), cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
-					index = index+1  --перелистывание слота
+				slotCount = turtle.getItemCount(getTurtleSlot(index))
+				while slotCount >= n9 do
+					turtle_get(chest, cell, n9-slotCount, getTurtleSlot(index))
+					index = index+1
+					slotCount = turtle.getItemCount(getTurtleSlot(index))
 				end
 			end
 			
+			turtle.select(16)
 			turtle.craft(64)
 			unloadAll()
 		end

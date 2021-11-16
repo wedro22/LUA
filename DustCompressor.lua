@@ -116,7 +116,7 @@ local function chest_stack(chest)
 			
 			for cell, cellcount in pairs(dusts[dust]) do
 				turtle_get(chest, cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
-				while (turtle.getItemCount(getTurtleSlot(index))>=n9) do
+				while ((turtle.getItemCount(getTurtleSlot(index))>=n9) and (index<9)) do
 					index = index + 1
 					turtle_get(chest, cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
 				end

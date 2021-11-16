@@ -1,5 +1,4 @@
-﻿
---storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
+﻿--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
 --minecraft:chest_0 xu2:tilelargishchest_0
 local all_period = 20
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
@@ -58,7 +57,7 @@ end
 local function chest_stack(chest)
 	lut = modem.callRemote(chest, "list")
 	if (not lut) or #lut == 0 then
-		return false
+		return
 	end
 	--составление таблицы всех пылей типа
 	--таблицаПыли{пыль1={номер слота=кол-во, номер слота=кол-во}, пыль2={}}
@@ -80,8 +79,8 @@ local function chest_stack(chest)
 		end
 	end
 	
-	for dust, val in pairs(dusts) do
-		print(dustsSumm.dust, dustsSumm[dust])
+	for dust, val in pairs(dustsSumm) do
+		print(dust, val)
 	end
 	
 	
@@ -91,7 +90,7 @@ refrechDevices()
 
 for i, chest in pairs(chest_all) do
 	is = chest_stack(chest)
-	print(i, chest, is)
+	print("f", chest, is)
 	sleep(all_period/#chest_all)
 end
 

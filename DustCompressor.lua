@@ -109,7 +109,7 @@ local function chest_stack(chest)
 			index = 1
 			for cell, c in pairs(dusts[dust]) do
 				--pushItems(toName, fromSlot [, limit [, toSlot]])
-				while not turtle.getItemCount(getTurtleSlot(index))>=n9 do  --пока ячейки заполняются дополна
+				while (not (turtle.getItemCount(getTurtleSlot(index))>=n9)) and (index<9) do  --пока ячейки заполняются дополна
 					--попытка заполнить остаток текущего слота
 					modem.callRemote(chest, "pushItems", getSelf(), cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
 					index = index+1  --перелистывание слота

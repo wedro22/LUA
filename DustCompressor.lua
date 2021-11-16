@@ -57,10 +57,12 @@ local function unloadAll()
 		if turtle.getItemCount(i)>0 then
 			--pullItems(fromName, fromSlot [, limit [, toSlot]])
 			modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
+			sleep(1)
 			if turtle.getItemCount(i)>0 then
-				while if turtle.getItemCount(i)>0 do
+				while turtle.getItemCount(i)>0 do
 					sleep(all_period)
 					modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
+					sleep(1)
 				end
 			end
 		end
@@ -138,7 +140,6 @@ local function chest_stack(chest)
 			turtle.select(16)
 			turtle.craft(64)
 			unloadAll()
-			turtle.select(16)
 		end
 	end
 	
@@ -149,10 +150,12 @@ end
 refrechDevices()
 storage = getDeviceList(storagename)
 unloadAll()
-for i, chest in pairs(chest_all) do
-	print(i, "/", #chest_all, chest)
-	chest_stack(chest)
-	sleep(all_period/#chest_all)
+while true do
+	for i, chest in pairs(chest_all) do
+		print(i, "/", #chest_all, chest)
+		chest_stack(chest)
+		sleep(all_period/#chest_all)
+	end
 end
 
 

@@ -1,6 +1,7 @@
 ﻿local all_period = 20
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
-local storagedrawers = "storagedrawers:controller"  --хранилка пылей
+local storagename = "storagedrawers:controller"  --хранилка пылей
+local storage  --таблица хранилка пылей
 --сундуки для подключений
 local chest_all = {}  --список всех сундуков сети, обновляется refrechDevices()
 local chest_names = {
@@ -54,8 +55,14 @@ end
 local function unloadAll()
 	for i=1, 16 do
 		if turtle.getItemCount(i)>0 then
-			turtle.select(i)
-			turtle.drop(64)
+			--pullItems(fromName, fromSlot [, limit [, toSlot]])
+			modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
+			if turtle.getItemCount(i)>0 then
+				while if turtle.getItemCount(i)>0 do
+					sleep(all_period)
+					modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
+				end
+			end
 		end
 	end
 end
@@ -140,11 +147,11 @@ end
 
 
 refrechDevices()
-
+storage = getDeviceList(storagename)
+unloadAll()
 for i, chest in pairs(chest_all) do
-	unloadAll()
-	chest_stack(chest)
 	print(i, "/", #chest_all, chest)
+	chest_stack(chest)
 	sleep(all_period/#chest_all)
 end
 

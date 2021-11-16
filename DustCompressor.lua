@@ -51,6 +51,15 @@ local function getSelf()
 	return modem.getNameLocal()
 end
 
+local function unloadAll()
+	for i=1, 16 do
+		if turtle.getItemCount(i)>0 then
+			turtle.select(i)
+			turtle.drop(64)
+		end
+	end
+end
+
 local function getTurtleSlot(index)
 	slot = index
 	if index>=4 and index<=6 then
@@ -108,16 +117,19 @@ local function chest_stack(chest)
 			end
 			
 			turtle.craft(64)
+			unloadAll()
 		end
 	end
 	
 	
 end
 
+
 refrechDevices()
 
 for i, chest in pairs(chest_all) do
-	is = chest_stack(chest)
+	unloadAll()
+	chest_stack(chest)
 	print(i, "/", #chest_all, chest)
 	sleep(all_period/#chest_all)
 end

@@ -1,6 +1,4 @@
-﻿--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
---minecraft:chest_0 xu2:tilelargishchest_0
-local all_period = 20
+﻿local all_period = 20
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
 local storagedrawers = "storagedrawers:controller"  --хранилка пылей
 --сундуки для подключений
@@ -79,8 +77,14 @@ local function chest_stack(chest)
 		end
 	end
 	
-	for dust, val in pairs(dustsSumm) do
-		print(dust, val)
+	for dust, count in pairs(dustsSumm) do
+		n9 = math.floor(count/9)
+		if n9>0 then
+			n=0
+			for cell, c in pairs(dust[d]) do
+				print(cell, c)
+			end
+		end
 	end
 	
 	
@@ -90,7 +94,7 @@ refrechDevices()
 
 for i, chest in pairs(chest_all) do
 	is = chest_stack(chest)
-	print("f", chest, is)
+	print(i, "/", #chest_all, chest)
 	sleep(all_period/#chest_all)
 end
 

@@ -63,6 +63,9 @@ local function unloadAll()
 					sleep(all_period)
 					modem.callRemote(storage[1], "pullItems", getSelf, i, 64, 1)
 					sleep(1)
+					if turtle.getItemCount(i)>0 then
+						turtle.drop(64)
+					end
 				end
 			end
 		end

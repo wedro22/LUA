@@ -59,8 +59,8 @@ local function chest_stack(chest)
 	if (not lut) or #lut == 0 then
 		return
 	end
-	--составление таблицы всех пылей типа
-	--таблицаПыли{пыль1={номер слота=кол-во, номер слота=кол-во}, пыль2={}}
+	--составление таблицы всех пылей сортируя по параметру damage типа
+	--таблицаПыли{пыль1(в качестве имени - damage)={номер слота=кол-во, номер слота=кол-во}, пыль2={}}
 	dusts = {}  --таблица всех этих пылей
 	dustsSumm = {} --некрасиво, для порядка первой таблицы, подсчет сумм пылей идёт в отдельной типа имя = сумма
 	for i, item in pairs(lut) do
@@ -69,12 +69,12 @@ local function chest_stack(chest)
 			--если dustTiny
 			if item.damage < gID.damage then
 				--если поля пыли еще нет
-				if not dusts[item.name] then
-					dusts[item.name] = {}
-					dustsSumm[item.name] = 0
+				if not dusts[item.damage] then
+					dusts[item.damage] = {}
+					dustsSumm[item.damage] = 0
 				end
-				dusts[item.name][i] = item.count
-				dustsSumm[item.name] = dustsSumm[item.name] + item.count
+				dusts[item.damage][i] = item.count
+				dustsSumm[item.damage] = dustsSumm[item.damage] + item.count
 			end
 		end
 	end

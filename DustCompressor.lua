@@ -1,4 +1,5 @@
-﻿--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
+﻿
+--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
 --minecraft:chest_0 xu2:tilelargishchest_0
 local all_period = 20
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
@@ -62,6 +63,7 @@ local function chest_stack(chest)
 	--составление таблицы всех пылей типа
 	--таблицаПыли{пыль1={номер слота=кол-во, номер слота=кол-во}, пыль2={}}
 	dusts = {}  --таблица всех этих пылей
+	dustsSumm = {} --некрасиво, для порядка первой таблицы, подсчет сумм пылей идёт в отдельной типа имя = сумма
 	for i, item in pairs(lut) do
 		--gregtech "gregtech:meta_item_1"
 		if item.name == gID.name then
@@ -70,22 +72,25 @@ local function chest_stack(chest)
 				--если поля пыли еще нет
 				if not dusts[item.name] then
 					dusts[item.name] = {}
+					dustsSumm[item.name] = 0
 				end
 				dusts[item.name][i] = item.count
+				dustsSumm[item.name] = dustsSumm[item.name] + item.count
 			end
 		end
 	end
 	
-	for k, v in pairs(dusts) do
-		print(k, v)
+	for dust, val in pairs(dusts) do
+		print(dustsSumm.dust, dustsSumm[dust])
 	end
+	
 	
 end
 
 refrechDevices()
 
 for i, chest in pairs(chest_all) do
-	is = chest_ctack(chest)
+	is = chest_stack(chest)
 	print(i, chest, is)
 	sleep(all_period/#chest_all)
 end

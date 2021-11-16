@@ -72,6 +72,7 @@ end
 
 local function turtle_get(chest, fromSlot, lim, toSlot)
 	modem.callRemote(chest, "pushItems", getSelf(), fromSlot, lim, toSlot)
+	sleep(0.2)
 end
 
 local function chest_stack(chest)
@@ -110,23 +111,21 @@ local function chest_stack(chest)
 			
 			n9 = math.floor(maxcount/9)
 			
+			
 			index = 1
-			slotCount = 0
-			for cell, c in pairs(dusts[dust]) do
-				--pushItems(toName, fromSlot [, limit [, toSlot]])
-				turtle_get(chest, cell, n9-slotCount, getTurtleSlot(index))
-				slotCount = turtle.getItemCount(getTurtleSlot(index))
-				if slotCount<9 then
-					break
-				else
+			
+			for cell, cellcount in pairs(dusts[dust]) do
+				turtle_get(chest, cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
+				while (turtle.getItemCount(getTurtleSlot(index))>=n9) do
 					index = index + 1
-					slotCount = 0
+					turtle_get(chest, cell, n9-turtle.getItemCount(getTurtleSlot(index)), getTurtleSlot(index))
 				end
 			end
 			
 			turtle.select(16)
 			turtle.craft(64)
 			unloadAll()
+			turtle.select(16)
 		end
 	end
 	

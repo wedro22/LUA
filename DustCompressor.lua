@@ -2,6 +2,7 @@
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
 local storagename = "storagedrawers:controller"  --хранилка пылей
 local storage  --таблица хранилка пылей
+local turtl
 --сундуки для подключений
 local chest_all = {}  --список всех сундуков сети, обновляется refrechDevices()
 local chest_names = {
@@ -21,6 +22,7 @@ modem.open(15)
 --обновление списка устройств device_all
 local function refrechDevices()
 	device_all = modem.getNamesRemote()
+	turtl = modem.getNameLocal()
 	--table.insert(device_all, 0, modem.getNameLocal()) --вставить себя на индекс 0
 	for _, dev in pairs(device_all) do
 		for _, ch in pairs(chest_names) do
@@ -47,21 +49,16 @@ local function getDeviceList(device_name)
 	return dev_list
 end
 
---своё имя в сети
-local function getSelf()
-	return modem.getNameLocal()
-end
-
 local function unloadAll()
 	for i=1, 16 do
 		if turtle.getItemCount(i)>0 then
 			--pullItems(fromName, fromSlot [, limit [, toSlot]])
-			modem.callRemote(storage[1], "pullItems", getSelf(), i, 64, 1)
+			modem.callRemote(storage[1], "pullItems", turtl, i, 64, 1)
 			sleep(1)
 			if turtle.getItemCount(i)>0 then
 				while turtle.getItemCount(i)>0 do
 					sleep(all_period)
-					modem.callRemote(storage[1], "pullItems", getSelf(), i, 64, 1)
+					modem.callRemote(storage[1], "pullItems", turtl, i, 64, 1)
 					sleep(1)
 					if turtle.getItemCount(i)>0 then
 						turtle.drop(64)
@@ -83,7 +80,7 @@ local function getTurtleSlot(index)
 end
 
 local function turtle_get(chest, fromSlot, lim, toSlot)
-	modem.callRemote(chest, "pushItems", getSelf(), fromSlot, lim, toSlot)
+	modem.callRemote(chest, "pushItems", turtl, fromSlot, lim, toSlot)
 	sleep(0.2)
 end
 

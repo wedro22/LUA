@@ -1,5 +1,6 @@
 ﻿--storagedrawers:controller_0 turtle_0 minecraft:ironchest_diamond_0
 --minecraft:chest_0 xu2:tilelargishchest_0
+local all_period = 20
 local device_all = {}  --список всех устройств сети, обновляется refrechDevices()
 local storagedrawers = "storagedrawers:controller"  --хранилка пылей
 --сундуки для подключений
@@ -9,6 +10,8 @@ local chest_names = {
 	chest = "minecraft:chest",
 	largishchest = "xu2:tilelargishchest"
 }
+--стандартный шаблон грегтех итемов от информации getItemDetail = пыль? меньше чем damage и соотв. имя
+local gID = {damage = 1000, name = "gregtech:meta_item_1"}
 
 
 
@@ -50,7 +53,44 @@ local function getSelf()
 	return modem.getNameLocal()
 end
 
-refrechDevices()
-for k, v in pairs(chest_all) do
-	print(k, v)
+
+local function chest_stack(chest)
+	lut = modem.callRemote(chest, "list")
+	if (not lut) or #lut == 0 then
+		return false
+	end
+	--составление таблицы всех пылей типа
+	--таблицаПыли{пыль1={номер слота=кол-во, номер слота=кол-во}, пыль2={}}
+	dusts = {}  --таблица всех этих пылей
+	for i, item in pairs(lut) do
+		--gregtech "gregtech:meta_item_1"
+		if item.name == gID.name then
+			--если dustTiny
+			if item.damage < gID.damage then
+				--если поля пыли еще нет
+				if not dusts[item.name] then
+					dusts[item.name] = {}
+				end
+				dusts[item.name][i] = item.count
+			end
+		end
+	end
+	
+	for k, v in pairs(dusts) do
+		print(k, v)
+	end
+	
 end
+
+refrechDevices()
+
+for i, chest in pairs(chest_all) do
+	is = chest_ctack(chest)
+	print(i, chest, is)
+	sleep(all_period/#chest_all)
+end
+
+
+
+
+

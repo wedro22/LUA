@@ -6,7 +6,7 @@ local turtl
 --сундуки для подключений
 local chest_all = {}  --список всех сундуков сети, обновляется refrechDevices()
 local chest_names = {
-	gregchest = "gregtech:machine"
+	gregchest = "gregtech:machine",
 	ironchest = "minecraft:ironchest",
 	chest = "minecraft:chest",
 	largishchest = "xu2:tilelargishchest"

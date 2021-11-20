@@ -15,7 +15,7 @@ local chest_names = {
 local gID = {dustTiny_min_damage = 0, dustTiny_max_damage = 999, name = "gregtech:meta_item_1",
 			 dust_min_damage = 2000, dust_max_damage = 2999,
 			 dustSmall_min_damage = 1000, dustSmall_max_damage = 1999}
-local minecraft = {"minecraft:iron_nugget", "minecraft:gold_nugget")
+local minecraft = {"minecraft:iron_nugget", "minecraft:gold_nugget"}
 
 
 

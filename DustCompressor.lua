@@ -27,7 +27,7 @@ if fs.exists(file) then
 	while str do
 		if #str > 5 then  --вставлять в таблицу только более длинные строки
 			--str = string.sub(str, 2, #str-1) --если есть ковычки
-			table.insert(str)
+			table.insert(minecraft, str)
 		end
 		str = f.readLine()
 	end

@@ -15,7 +15,24 @@ local chest_names = {
 local gID = {dustTiny_min_damage = 0, dustTiny_max_damage = 999, name = "gregtech:meta_item_1",
 			 dust_min_damage = 2000, dust_max_damage = 2999,
 			 dustSmall_min_damage = 1000, dustSmall_max_damage = 1999}
-local minecraft = {"minecraft:iron_nugget", "minecraft:gold_nugget", "minecraft:redstone"}
+
+--список итемов, собираемых из сундуков
+local minecraft = {}
+local path = fs.getDir(shell.getRunningProgram())
+local file = path.."/Itemlist.lua"
+--local minecraft = {"minecraft:iron_nugget", "minecraft:gold_nugget", "minecraft:redstone"}
+if fs.exists(file) then
+	f = fs.open(file, "r")
+	str = f.readLine()
+	while str do
+		if #str > 5 then  --вставлять в таблицу только более длинные строки
+			--str = string.sub(str, 2, #str-1) --если есть ковычки
+			table.insert(str)
+		end
+		str = f.readLine()
+	end
+	f.close()
+end
 
 
 
@@ -147,8 +164,12 @@ local function chest_stack(chest)
 			end
 			
 		--minecraft
-		elseif (item.name == minecraft[1]) or (item.name == minecraft[2]) or (item.name == minecraft[3]) then
-			table.insert(items, i)
+		else
+			for _, str in pairs(minecraft) do
+				if item.name == str then
+					table.insert(items, i)
+				end
+			end
 		end
 	end
 	

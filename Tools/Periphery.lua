@@ -11,7 +11,7 @@ function Periphery:new(name)
             else
                 obj.name = name
             end
-        else error("error: peripheral name: "..name); end
+        else error("error: peripheral name"); end
         obj.type = peripheral.getType(name)
     end)
     if not s then print(e); return nil; end
@@ -27,7 +27,7 @@ function Periphery:new(name)
             end
         end); sleep(0.5)
         if not s then
-            print("warning: peripheral no get Metods; name:"..name)
+            print("warning: peripheral no get Metods")
         end
         return metods
     end
@@ -50,7 +50,7 @@ function Periphery:new(name)
                 else list = peripheral.call(obj.side, "list"); end
             end); sleep(0.5)
             if not s then
-                print("warning: peripheral cant call list; name:"..obj.name.."; side:"..obj.side)
+                print("warning: peripheral cant call list")
             end
         end
         return list

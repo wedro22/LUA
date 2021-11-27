@@ -11,6 +11,7 @@ function Nearby.getTypes()
         list.bottom = peripheral.getType("bottom")
         list.front = peripheral.getType("front")
         list.back = peripheral.getType("back")
+    sleep(0.5)
     return list
 end
 

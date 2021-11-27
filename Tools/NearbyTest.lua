@@ -10,7 +10,7 @@ names = r.getTypes()
 for s, n in pairs(names) do
     print(s, n)
 end
-names = r.getSimilarFromTable(r.getNamesRemote(), {"minecraft:"})
+names = r.getSimilarFromTable(r.getTypes(), {"minecraft:"})
 for s, n in pairs(names) do
     print(s, n)
 end

@@ -1,20 +1,16 @@
 Net = {}
-Net.names = {}
 
-local function msg(message, sleep_time)
-    if message then print(message); end
-    if sleep_time then sleep(sleep_time); end
-end
-
-function Net.refresh(canal)
-    function openModem()
-        modem = peripheral.find("modem")
-        if canal then modem.open(canal);
-            else modem.open(15); end
-    end
-    xpcall(openModem(), msg("modem not found", 20))
-    names = modem.getNamesRemote()
-
+---getNames List all remote peripherals on the wired network
+---@return table names
+function Net.getNamesRemote()
+    --s, e = pcall(openModem)
+    --if not pcall(openModem) then msg("modem error"); end
+    s, e = pcall(function()
+        modem = peripheral.find("modem").open(15)
+        return modem.getNamesRemote()
+    end)
+    if not s then print("warning: modem not found"); end
+    return {}
 end
 
 return Net

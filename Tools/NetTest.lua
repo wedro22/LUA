@@ -6,8 +6,7 @@ print(file)
 assert(fs.exists(file))
 r = require(filename)
 ----------------------------------
-r.refresh()
-names = r.names
+names = r.getNamesRemote()
 for _, n in pairs(names) do
     print(n)
 end

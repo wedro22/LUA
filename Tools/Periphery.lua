@@ -17,13 +17,13 @@ function Periphery:new(name)
     if not s then print(e); return nil; end
 
     --modem-names OR nearby-sides
-    function obj:getMetods()
+    function obj:getMethods()
         metods = {}
         s, e = pcall(function()
             if not obj.side then
-                metods = peripheral.getMetods(obj.name)
+                metods = peripheral.getMethods(obj.name)
             else
-                metods = peripheral.getMetods(obj.side)
+                metods = peripheral.getMethods(obj.side)
             end
         end); sleep(0.5)
         if not s then
@@ -33,7 +33,7 @@ function Periphery:new(name)
     end
 
     function obj:hasMetod(metod)
-        for _, v in pairs(obj:getMetods()) do
+        for _, v in pairs(obj:getMethods()) do
             if v == metod then
                 return true
             end

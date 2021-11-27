@@ -6,7 +6,7 @@ print(file)
 assert(fs.exists(file))
 r = require(filename)
 ----------------------------------
-chest = r.new("left")
+chest = r:new("left")
 for s, n in pairs(chest) do
     print(s, n)
 end

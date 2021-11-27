@@ -27,7 +27,7 @@ function Periphery:new(name)
             end
         end); sleep(0.5)
         if not s then
-            print("warning: peripheral no get Metods; name:"..obj.name.."; side:"..obj.side)
+            print("warning: peripheral no get Metods; name:"..name)
         end
         return metods
     end

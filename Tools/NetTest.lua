@@ -10,3 +10,7 @@ names = r.getNamesRemote()
 for _, n in pairs(names) do
     print(n)
 end
+names = r.getSimilarFromTable(r.getNamesRemote(), {"minecraft:"})
+for _, n in pairs(names) do
+    print(n)
+end

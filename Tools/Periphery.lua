@@ -88,6 +88,10 @@ function Periphery:new(name)
         return state, list
     end
 
+    function obj:pushItems(target_name, from_slot, lim, to_slot)
+        return obj:request_shield("pushItems", target_name, from_slot, lim, to_slot)
+    end
+
 
 
     setmetatable(obj, self)

@@ -23,5 +23,6 @@ tostring = function (...)
 end
 
 chest = r:new("left")
-list = chest:getMetadata()
-print(tostring(list))
+--list = chest:getMetadata()
+chest:pushItems("right", 1, 1, 1)
+--print(tostring(list))

@@ -1,4 +1,7 @@
 path = fs.getDir(fs.getDir(shell.getRunningProgram()))
-package.path = package.path..';/'..path..'/Tools/?'
+package.path = package.path..';/'..path..'/Tools/?.lua'
+
 near = require("Nearby")
-print("true")
+pr = require("PrintUtils")
+container = require("ContainerUtils")
+

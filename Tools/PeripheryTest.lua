@@ -1,10 +1,10 @@
 local filename = "Periphery"
 ----------------------------------
-local path = fs.getDir(shell.getRunningProgram())
-local file = path.."/"..filename..".lua"
-print(file)
-assert(fs.exists(file))
-r = require(file)
+--local path = fs.getDir(shell.getRunningProgram())
+--local file = path.."/"..filename..".lua"
+--print(file)
+--assert(fs.exists(file))
+r = require(filename)
 pr = require("PrintUtils")
 ----------------------------------
 

@@ -1,18 +1,19 @@
 Net = {}
 
 ---getNames List all remote peripherals on the wired network
----@return table names
+---@return boolean, table names
 function Net.getNamesRemote()
     names = {}
-    --s, e = pcall(openModem)
-    --if not pcall(openModem) then msg("modem error"); end
     s, e = pcall(function()
         modem = peripheral.find("modem"); sleep(0.5)
         modem.open(15); sleep(0.5)
         names = modem.getNamesRemote()
     end)
-    if not s then print("warning: modem not found"); end
-    return names
+    if not s then
+        print("warning: modem not found")
+        return false, names
+    end
+    return true, names
 end
 
 ---getSimilarFromTable

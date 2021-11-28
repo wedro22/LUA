@@ -51,16 +51,16 @@ function Periphery:new(name)
     function obj:request_shield(method_name, ...)
         local ret
         if not obj:hasMethod(method_name) then return false, "method is missing"; end
+        local args = {...}
         s, e = pcall(function()
-            if obj.name then ret = peripheral.call(obj.name, method_name, ...)
-            else ret = peripheral.call(obj.side, method_name, ...); end
+            if obj.name then ret = peripheral.call(obj.name, method_name, unpack(args))
+            else ret = peripheral.call(obj.side, method_name, unpack(args)); end
         end); sleep(0.5)
         if s then return true, ret; end
         --if error \/
         if type(method_name)=="string" then
             write("warning: peripheral cant call: "..method_name)
-            if ... then
-                args = {...}
+            if #args>0 then
                 ss, ee = pcall(function()
                     for k, v in pairs(args) do
                         write("; arg"..k..":"..v)

@@ -6,8 +6,8 @@ fileutils = require("FileUtils")
 
 t={1,2,3,{2,4,4}}
 fileutils.writeJSON("asd", t)
-tt = fileutils.readJSON("asd")
-print(tt)
+state, tt = fileutils.readJSON("asd")
+print(textutils.serialize(tt))
 
 
 

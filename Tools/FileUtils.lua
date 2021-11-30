@@ -20,7 +20,6 @@ function FileUtils.readFile(file_name)
 end
 
 function FileUtils.writeJSON(file_name, obj)
-    local obj
     local path = fs.getDir(shell.getRunningProgram())
     local file = path.."/"..file_name
     f = fs.open(file, "w")
@@ -28,7 +27,6 @@ function FileUtils.writeJSON(file_name, obj)
     f.write(jsn)
     f.close()
     return true, obj
-    return false
 end
 
 function FileUtils.readJSON(file_name)

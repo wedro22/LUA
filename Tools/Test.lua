@@ -1,9 +1,13 @@
 net = require("Net")
-near = require("Nearby")
+nearby = require("Nearby")
 periphery = require("Periphery")
-pr = require("PrintUtils")
+printutils = require("PrintUtils")
+fileutils = require("FileUtils")
 
-
+t={1,2,3,{2,4,4}}
+fileutils.writeJSON("asd", t)
+tt = fileutils.readJSON("asd")
+print(tt)
 
 
 

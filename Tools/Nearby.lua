@@ -4,7 +4,7 @@ Nearby = {}
 ---getTypes Defines the periphery around itself
 ---@return table as {side = type}
 function Nearby.getTypes()
-    list = {}
+    local list = {}
         list.left = peripheral.getType("left")
         list.right = peripheral.getType("right")
         list.top = peripheral.getType("top")

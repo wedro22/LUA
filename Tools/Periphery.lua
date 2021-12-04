@@ -11,7 +11,10 @@ function Periphery:new(name)
             else
                 obj.name = name
             end
-        else error("error: peripheral name"); end
+        else
+            print("error: peripheral name: "..tostring(name))
+            return nil
+        end
         obj.type = peripheral.getType(name)
     end)
     if not s then print(e); return nil; end

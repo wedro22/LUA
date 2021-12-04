@@ -1,7 +1,7 @@
 Item = {}
 
-function Item.isItem(obj)
-    if obj.name and obj.damage then
+function Item.isItem(tabl)
+    if tabl.name and tabl.damage then
         return true
     end
     return false
@@ -15,6 +15,23 @@ function Item.compare(item1, item2)
         return true
     end
     return false
+end
+
+function Item:new(tabl)
+    local obj = {}
+    if not Item:isItem(tabl) then return nil; end
+    obj = tabl
+
+    function obj:compare(item2)
+        return Item.compare(obj, item2)
+    end
+
+
+
+
+    setmetatable(obj, self)
+    self.__index = self
+    return obj
 end
 
 return Item

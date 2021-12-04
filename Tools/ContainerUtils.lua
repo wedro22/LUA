@@ -10,4 +10,8 @@ function ContainerUtils.listContain(list, item)
     return false
 end
 
+function ContainerUtils.takeFromTo(from_container, slot_item, to_container)
+    asddsdasasd
+end
+
 return ContainerUtils
